@@ -1,8 +1,5 @@
 COMMITHASH=ec4bf0d5c99b9150fbb5445c41d22c929c11040a
-LOGIN=dpetruk
-PASSWORD=PASSWORD
-DOCKER_LOGIN=bavaria
-KEYPAIR=desktop_linux
+# KEYPAIR=desktop_linux
 
 git clone https://github.com/inspirehep/inspire-next.git $COMMITHASH && \
 cd $COMMITHASH && \
@@ -27,8 +24,8 @@ cd .. && \
 # cd .. && \
 
 sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub_config/*/* && \
-echo "sed'ed" && \
 cd .. && \
+echo $PASSWORD | kinit $LOGIN@CERN.CH && \
 scp -rp folder-$COMMITHASH $LOGIN@lxplus-cloud.cern.ch:~/ && \
 cd folder-$COMMITHASH && \
 OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh) && \
