@@ -7,6 +7,7 @@ KEYPAIR=desktop_linux
 python repo.py $COMMITHASH && \
 cp Dockerfile $COMMITHASH/ && \ # should be included to the repo itself
 cd $COMMITHASH && \
+docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
 docker build -t $DOCKER_LOGIN/inspire-base:$COMMITHASH . && \
 docker push $DOCKER_LOGIN/inspire-base:$COMMITHASH && \
 cd .. && \
