@@ -4,9 +4,16 @@ PASSWORD=PASSWORD
 DOCKER_LOGIN=bavaria
 KEYPAIR=desktop_linux
 
-python repo.py $COMMITHASH && \
-cp Dockerfile $COMMITHASH/ && \ # should be included to the repo itself
+git clone https://github.com/inspirehep/inspire-next.git $COMMITHASH && \
 cd $COMMITHASH && \
+git checkout $COMMITHASH && \
+# python repo.py $COMMITHASH && \
+cd .. && \
+ls && \
+cp Dockerfile $COMMITHASH/ && \
+echo "copied dockerfile" && \
+cd $COMMITHASH && \
+ls && \
 docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
 docker build -t $DOCKER_LOGIN/inspire-base:$COMMITHASH . && \
 docker push $DOCKER_LOGIN/inspire-base:$COMMITHASH && \
@@ -19,11 +26,12 @@ cd .. && \
 # echo "export KUBECONFIG=~/$COMMITHASH/conf/config" > conf/env.sh && \
 # cd .. && \
 
-sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub_config/*/*
+sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub_config/*/* && \
+echo "sed'ed" && \
 cd .. && \
-scp -rp folder-$COMMITHASH $LOGIN@lxplus-cloud.cern.ch:~/
-cd folder-$COMMITHASH
-OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh)
-echo $OUTPUT | grep -Po '&{80}\K(.*</testsuite>)' > output-$COMMITHASH.xml
-echo "___________________________________________________________________"
+scp -rp folder-$COMMITHASH $LOGIN@lxplus-cloud.cern.ch:~/ && \
+cd folder-$COMMITHASH && \
+OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh) && \
+echo $OUTPUT | grep -Po '&{80}\K(.*</testsuite>)' > output-$COMMITHASH.xml && \
+echo "___________________________________________________________________" && \
 echo $OUTPUT | grep -Po 'EXITCODE: \K(\d+)'
