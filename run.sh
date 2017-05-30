@@ -18,7 +18,7 @@ KEYPAIR=desktop_linux
 # echo "export KUBECONFIG=~/$COMMITHASH/conf/config" > conf/env.sh && \
 # cd .. && \
 
-sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub/*/*
+sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub_config/*/*
 cd .. && \
 scp -rp folder-$COMMITHASH $LOGIN@lxplus-cloud.cern.ch:~/
 cd folder-$COMMITHASH
