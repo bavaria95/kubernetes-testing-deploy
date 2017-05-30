@@ -1,15 +1,15 @@
-COMMITHASH=6ee54fbdeff88ca7ac770eb5ad61ec0850a1fd49
+COMMITHASH=ec4bf0d5c99b9150fbb5445c41d22c929c11040a
 LOGIN=dpetruk
 PASSWORD=PASSWORD
 DOCKER_LOGIN=bavaria
 KEYPAIR=desktop_linux
 
-# python repo.py $COMMITHASH && \
-# cp Dockerfile $COMMITHASH/ && \ # should be included to the repo itself
-# cd $COMMITHASH && \
-# docker build -t $DOCKER_LOGIN/inspire-base:$COMMITHASH . && \
-# docker push $DOCKER_LOGIN/inspire-base:$COMMITHASH && \
-# cd .. && \
+python repo.py $COMMITHASH && \
+cp Dockerfile $COMMITHASH/ && \ # should be included to the repo itself
+cd $COMMITHASH && \
+docker build -t $DOCKER_LOGIN/inspire-base:$COMMITHASH . && \
+docker push $DOCKER_LOGIN/inspire-base:$COMMITHASH && \
+cd .. && \
 
 # python cluster_create.py $LOGIN $PASSWORD cluster-$COMMITHASH $KEYPAIR && \
 
