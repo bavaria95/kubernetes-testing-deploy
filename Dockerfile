@@ -3,6 +3,7 @@ FROM inspirehep/python-base
 ADD . /code
 WORKDIR /code
 
+USER root
 RUN virtualenv /code/virtualenv && \
     . /code/virtualenv/bin/activate && \
     pip install --upgrade pip && \
