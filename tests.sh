@@ -6,7 +6,7 @@ echo $COMMITHASH
 touch ok1.txt
 # cd ..
 # . conf/env.sh
-export KUBECONFIG=/afs/cern.ch/user/d/dpetruk/backup_stuff/config
+export KUBECONFIG=/afs/cern.ch/user/d/dpetruk/config
 touch ok2.txt
 echo `kubectl get namespaces` > ns.txt
 kubectl create namespace "commit-$COMMITHASH"
