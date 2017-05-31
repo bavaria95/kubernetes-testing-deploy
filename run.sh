@@ -23,11 +23,17 @@ cd .. && \
 # echo "export KUBECONFIG=~/$COMMITHASH/conf/config" > conf/env.sh && \
 # cd .. && \
 
+ls && \
 sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub_config/*/* && \
+echo "sedded" && \
+FOLDER=${PWD##*/}
 cd .. && \
 echo $PASSWORD | kinit $LOGIN@CERN.CH && \
-scp -rp folder-$COMMITHASH $LOGIN@lxplus-cloud.cern.ch:~/ && \
-cd folder-$COMMITHASH && \
+echo "after kinit" && \
+scp -rp $FOLDER $LOGIN@lxplus-cloud.cern.ch:~/folder-$COMMITHASH && \
+echo "scped" && \
+cd $FOLDER && \
+echo "cded $FOLDER"
 OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh) && \
 echo $OUTPUT | grep -Po '&{80}\K(.*</testsuite>)' > output-$COMMITHASH.xml && \
 echo "___________________________________________________________________" && \
