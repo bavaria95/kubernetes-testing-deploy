@@ -1,3 +1,5 @@
+#!/bin/bash -x
+
 COMMITHASH=ec4bf0d5c99b9150fbb5445c41d22c929c11040a
 # KEYPAIR=desktop_linux
 

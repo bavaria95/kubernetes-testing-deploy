@@ -1,3 +1,5 @@
+#!/bin/bash -x
+
 touch ok0.txt
 # cd code
 # COMMITHASH=`git rev-parse HEAD`
