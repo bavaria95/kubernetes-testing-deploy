@@ -1,7 +1,6 @@
 #!/bin/bash -x
 
 COMMITHASH=ec4bf0d5c99b9150fbb5445c41d22c929c11040a
-# KEYPAIR=desktop_linux
 
 git clone https://github.com/inspirehep/inspire-next.git $COMMITHASH && \
 cd $COMMITHASH && \
@@ -32,11 +31,15 @@ FOLDER=${PWD##*/}
 cd .. && \
 echo $PASSWORD | kinit $LOGIN@CERN.CH && \
 echo "after kinit" && \
-scp -rp $FOLDER $LOGIN@lxplus-cloud.cern.ch:~/folder-$COMMITHASH && \
-echo "scped" && \
+ls && \
+# scp -rp $FOLDER $LOGIN@lxplus-cloud.cern.ch:~/folder-$COMMITHASH && \
+# echo "scped" && \
 cd $FOLDER && \
-echo "cded $FOLDER"
-OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh) && \
+ls && \
+echo "cded $FOLDER" && \
+# OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh) && \
+OUTPUT=$(./tests.sh) && \
+
 echo $OUTPUT | grep -Po '&{80}\K(.*</testsuite>)' > output-$COMMITHASH.xml && \
 echo "___________________________________________________________________" && \
 echo $OUTPUT | grep -Po 'EXITCODE: \K(\d+)'
