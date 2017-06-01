@@ -9,10 +9,11 @@ echo `kubectl get namespaces` > ns.txt
 kubectl create namespace "commit-$COMMITHASH"
 kubectl get pods --namespace="commit-$COMMITHASH"
 kubectl apply -f kub_config/deps --validate=false --namespace="commit-$COMMITHASH"
-sleep 10
+sleep 20
 kubectl apply -f kub_config/web --validate=false --namespace="commit-$COMMITHASH"
-sleep 10
+sleep 20
 kubectl apply -f kub_config/tests --validate=false --namespace="commit-$COMMITHASH"
+sleep 10
 while ! kubectl --namespace=commit-$COMMITHASH get pods -a -o jsonpath='{.items[*].status.containerStatuses[0].state.terminated.exitCode}' | grep -q '^..*$'; do
     sleep 2
 done
