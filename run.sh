@@ -17,26 +17,14 @@ docker build -t $DOCKER_LOGIN/inspire-base:$COMMITHASH . && \
 docker push $DOCKER_LOGIN/inspire-base:$COMMITHASH && \
 cd .. && \
 
-# python cluster_create.py $LOGIN $PASSWORD cluster-$COMMITHASH $KEYPAIR && \
-
-# mkdir conf/ && \
-# mv ca.pem cert.pem config key.pem conf/ && \
-# echo "export KUBECONFIG=~/$COMMITHASH/conf/config" > conf/env.sh && \
-# cd .. && \
-
 ls && \
 sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:$COMMITHASH|g" kub_config/*/* && \
-echo "sedded" && \
 FOLDER=${PWD##*/}
 cd .. && \
 echo $PASSWORD | kinit $LOGIN@CERN.CH && \
 echo "after kinit" && \
 ls && \
-# scp -rp $FOLDER $LOGIN@lxplus-cloud.cern.ch:~/folder-$COMMITHASH && \
-# echo "scped" && \
 cd $FOLDER && \
-ls && \
-echo "cded $FOLDER" && \
 # OUTPUT=$(ssh -tt $LOGIN@lxplus-cloud.cern.ch < inside.sh) && \
 OUTPUT=$(./tests.sh) && \
 
