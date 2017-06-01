@@ -14,11 +14,11 @@ echo `kubectl get namespaces` > ns.txt
 kubectl create namespace "commit-$COMMITHASH"
 touch ok3.txt
 kubectl get pods --namespace="commit-$COMMITHASH"
-kubectl apply -f kub/deps --validate=false --namespace="commit-$COMMITHASH"
+kubectl apply -f kub_config/deps --validate=false --namespace="commit-$COMMITHASH"
 sleep 10
-kubectl apply -f kub/web --validate=false --namespace="commit-$COMMITHASH"
+kubectl apply -f kub_config/web --validate=false --namespace="commit-$COMMITHASH"
 sleep 10
-kubectl apply -f kub/tests --validate=false --namespace="commit-$COMMITHASH"
+kubectl apply -f kub_config/tests --validate=false --namespace="commit-$COMMITHASH"
 touch ok4.txt
 while ! kubectl --namespace=commit-$COMMITHASH get pods -a -o jsonpath='{.items[*].status.containerStatuses[0].state.terminated.exitCode}' | grep -q '^..*$'; do
     sleep 2
@@ -33,9 +33,9 @@ kubectl --namespace="commit-$COMMITHASH" logs $PODNAME
 
 touch ok6.txt
 
-kubectl --namespace="commit-$COMMITHASH" delete -f kub/tests/
-kubectl --namespace="commit-$COMMITHASH" delete -f kub/web
-kubectl --namespace="commit-$COMMITHASH" delete -f kub/deps/
+kubectl --namespace="commit-$COMMITHASH" delete -f kub_config/tests/
+kubectl --namespace="commit-$COMMITHASH" delete -f kub_config/web
+kubectl --namespace="commit-$COMMITHASH" delete -f kub_config/deps/
 kubectl delete namespace "commit-$COMMITHASH"
 
 cd ..
