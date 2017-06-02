@@ -1,9 +1,8 @@
 #!/bin/bash -x
 
-touch ok0.txt
 # cd code
 # COMMITHASH=`git rev-parse HEAD`
-COMMITHASH=ec4bf0d5c99b9150fbb5445c41d22c929c11040a
+COMMITHASH=e5a697c762b1de3054103e25399aca7d051a3b1b
 echo $COMMITHASH
 echo `kubectl get namespaces` > ns.txt
 kubectl create namespace "commit-$COMMITHASH"
