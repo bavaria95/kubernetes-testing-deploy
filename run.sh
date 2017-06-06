@@ -30,6 +30,6 @@ OUTPUT=$(./tests.sh) && \
 
 echo $OUTPUT > out.txt
 
-echo $OUTPUT | grep -Po '&{80}\K(.*</testsuite>)' > output-$COMMITHASH.xml && \
+echo $OUTPUT | grep -Po '(<\?xml version=.*</testsuite>)' > output-$COMMITHASH.xml && \
 echo "___________________________________________________________________" && \
 echo $OUTPUT | grep -Po 'EXITCODE: \K(\d+)'
