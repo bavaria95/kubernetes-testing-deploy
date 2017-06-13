@@ -28,7 +28,7 @@ kubectl --namespace="commit-$COMMITHASH" delete -f kub_config/web
 kubectl --namespace="commit-$COMMITHASH" delete -f kub_config/deps/
 kubectl delete namespace "commit-$COMMITHASH"
 
-cd ..
-rm -rf folder-$COMMITHASH/
+# cd ..
+# rm -rf folder-$COMMITHASH/
 
 exit
