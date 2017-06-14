@@ -1,4 +1,4 @@
-COMMITHASH=commithashid
+COMMITHASH=somenewcommitinpr
 REPO=gitlab-registry.cern.ch/dpetruk/kubernetes-testing-deploy/inspire-base
 
 echo $BUILD_TAG
