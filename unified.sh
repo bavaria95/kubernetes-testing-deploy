@@ -21,7 +21,9 @@ done
 
 PODNAME=acceptance
 kubectl --namespace="commit-$COMMITHASH" get pods
+kubectl get ns
 EXITCODE=$(kubectl --namespace=commit-$COMMITHASH get pods -a -o jsonpath='{.items[*].status.containerStatuses[0].state.terminated.exitCode}')
+echo $EXITCODE
 OUTPUT=kubectl --namespace="commit-$COMMITHASH" logs $PODNAME
 
 kubectl --namespace="commit-$COMMITHASH" delete -f kubernetes-testing-deploy/kub_config/tests/
