@@ -21,7 +21,7 @@ done
 
 PODNAME=acceptance
 kubectl --namespace="commit-$COMMITHASH" get pods
-OUTPUT=kubectl --namespace="commit-$COMMITHASH" logs $PODNAME
+OUTPUT=$(kubectl --namespace="commit-$COMMITHASH" logs $PODNAME)
 EXITCODE=$(kubectl --namespace=commit-$COMMITHASH get pods -a -o jsonpath='{.items[*].status.containerStatuses[0].state.terminated.exitCode}')
 kubectl get ns
 echo "EXITCODE"
