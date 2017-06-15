@@ -1,3 +1,5 @@
+set -x
+
 COMMITHASH=somenewcommitinpr
 REPO=gitlab-registry.cern.ch/dpetruk/kubernetes-testing-deploy/inspire-base
 
