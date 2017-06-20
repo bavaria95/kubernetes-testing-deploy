@@ -1,9 +1,9 @@
 set -x
 
-COMMITHASH=somenewcommitinpr
+COMMITHASH=HEAD
 REPO=gitlab-registry.cern.ch/dpetruk/kubernetes-testing-deploy/inspire-base
 
-echo $BUILD_TAG
+# echo $BUILD_TAG
 
 sed -i -e "s|image: bavaria/inspire-base|image: $REPO:$COMMITHASH|g" kubernetes-testing-deploy/kub_config/*/*
 # sed -i -e "s|image: bavaria/inspire-base|image: bavaria/inspire-base:failing2|g" kubernetes-testing-deploy/kub_config/*/*
